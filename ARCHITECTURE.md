@@ -91,17 +91,6 @@ authorizedExecutors(address executor)
 
 ## 2. ProposalManager
 
-### Responsibility
-
-Handles treasury transaction proposals.
-
-Each proposal contains:
-
-- Target contract
-- ETH value
-- Call data
-- Execution timestamp (ETA)
-
 ### Proposal Structure
 
 ```solidity
@@ -233,11 +222,8 @@ Benefits:
 The project integrates libraries from **OpenZeppelin** to improve security.
 
 Libraries include:
-
 - ReentrancyGuard
-- SafeERC20
 - AccessControl
-- Address
 
 
 ---
@@ -327,63 +313,6 @@ Limits the impact of a compromised module.
 | Reentrancy payout | Pull payment model |
 | Hidden transactions | Proposal registry |
 | Governance takeover | Execution delay |
-
----
-
-# Testing Strategy
-
-The system includes **Foundry tests** that verify:
-
-- Proposal creation
-- Timelock enforcement
-- Authorized execution
-- Contributor reward claims
-
-Tests are located in:
-
-```
-test/Treasury.t.sol
-```
-
-Run tests using:
-
-```
-forge test
-```
-
----
-
-# Deployment
-
-Deployment is handled via a **Foundry script**.
-
-Location:
-
-```
-script/DeployTreasury.s.sol
-```
-
-Run deployment:
-
-```
-forge script script/DeployTreasury.s.sol \
---rpc-url <RPC_URL> \
---private-key <PRIVATE_KEY> \
---broadcast
-```
-
----
-
-# Future Improvements
-
-Potential upgrades include:
-
-- Governance voting (Governor contract)
-- Multi-signature execution
-- Batched treasury transactions
-- Token treasury support (ERC20)
-- Proposal cancellation
-- Emergency pause functionality
 
 ---
 
