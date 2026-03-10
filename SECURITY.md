@@ -30,7 +30,7 @@ The design incorporates multiple security layers:
 
 - Contributors claim rewards themselves via `claim()`  
 - Prevents **reentrancy attacks** and failed batch payments  
-- Use `ReentrancyGuard` on `claim()` and other ETH transfer functions
+- Use `ReentrancyGuard` on `claim()` 
 
 ###  Proposal Validation
 
