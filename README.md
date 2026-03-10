@@ -26,24 +26,21 @@ The treasury allows protocol governance to:
 
 ## Architecture
 
-```
-                Governance
-                     │
-                     ▼
-            AuthorizationManager
-                     │
-                     ▼
-              ProposalManager
-                     │
-                     ▼
-              TimelockController
-                     │
-                     ▼
-                 TreasuryCore
-                     │
-                     ▼
-          ContributorDistributor
-```
+## 1.Governance
+                    
+## 2.AuthorizationManager
+                    
+                     
+## 3.ProposalManager
+                     
+                     
+## 4.TimelockController
+                     
+                     
+## 5.TreasuryCore
+                     
+ ## 6.ContributorDistributor
+
 
 ### Core Modules
 
@@ -165,11 +162,6 @@ proposalManager.createProposal(
 treasury.executeProposal(proposalId);
 ```
 
-### Adding Contributor Rewards
-
-```solidity
-distributor.addReward(contributorAddress, rewardAmount);
-```
 
 ### Claiming Rewards
 

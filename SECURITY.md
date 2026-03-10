@@ -6,7 +6,7 @@ This project implements a **modular and secure treasury system** for decentraliz
 
 The design incorporates multiple security layers:
 
-- **Access control** with OpenZeppelin `AccessControl` roles (`GOVERNANCE_ROLE`, `EXECUTOR_ROLE`, `REWARD_MANAGER_ROLE`)  
+- **Access control** with OpenZeppelin `AccessControl` roles ( `EXECUTOR_ROLE`)  
 - **Timelock delay** to prevent instant execution of proposals  
 - **Pull payment model** for contributor rewards to prevent reentrancy attacks  
 - **Modular interfaces** for loose coupling and upgradeability  
@@ -20,8 +20,6 @@ The design incorporates multiple security layers:
 - Use `AccessControl` roles to separate responsibilities:
   - `DEFAULT_ADMIN_ROLE` – Governance and emergency admin
   - `EXECUTOR_ROLE` – Authorized executors for proposal execution
-  - `REWARD_MANAGER_ROLE` – Reward allocation
-- Avoid hardcoding addresses in contracts
 
 ### 2 Timelock Enforcement
 

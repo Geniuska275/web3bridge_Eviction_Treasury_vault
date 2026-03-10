@@ -17,26 +17,22 @@ Modules communicate through **interfaces**, making the system easier to upgrade,
 
 # Architecture Diagram
 
-```
-                Governance
-                     │
-                     ▼
-            AuthorizationManager
-                     │
-                     ▼
-              ProposalManager
-                     │
-                     ▼
-              TimelockController
-                     │
-                     ▼
-                 TreasuryCore
-                     │
-                     ▼
-          ContributorDistributor
-```
 
----
+## 1.Governance
+                    
+## 2.AuthorizationManager
+                    
+                     
+## 3.ProposalManager
+                     
+                     
+## 4.TimelockController
+                     
+                     
+## 5.TreasuryCore
+                     
+ ## 6.ContributorDistributor
+
 
 # Project Structure
 
@@ -159,13 +155,7 @@ TreasuryCore verifies:
 5. Execute call
 ```
 
-### Key Function
 
-```solidity
-executeProposal(uint256 proposalId)
-```
-
----
 
 ## 5. ContributorDistributor
 
@@ -181,14 +171,6 @@ The system uses the **pull payment model**, where contributors claim rewards the
 - Avoids failed bulk payouts
 - Reduces gas cost risks
 
-### Key Functions
-
-```solidity
-addReward(address contributor, uint256 amount)
-claim()
-```
-
----
 
 # Interfaces
 
