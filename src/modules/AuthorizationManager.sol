@@ -1,33 +1,31 @@
+
+
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract AuthorizationManager {
+import "@openzeppelin/contracts/access/AccessControl.sol";
 
-    address public governance;
+contract AuthorizationManager is AccessControl {
 
-    mapping(address => bool) public authorizedExecutors;
+    bytes32 public constant EXECUTOR_ROLE = keccak256("EXECUTOR_ROLE");
 
-    modifier onlyGovernance() {
-        require(msg.sender == governance, "Not governance");
-        _;
+    constructor(address governance) {
+
+        _grantRole(DEFAULT_ADMIN_ROLE, governance);
+        _grantRole(EXECUTOR_ROLE, governance);
     }
 
-    modifier onlyAuthorized() {
-        require(
-            msg.sender == governance || authorizedExecutors[msg.sender],
-            "Not authorized"
-        );
-        _;
-    }
-
-    constructor(address _governance) {
-        governance = _governance;
-    }
-
-    function setExecutor(address executor, bool allowed)
+    function addExecutor(address executor)
         external
-        onlyGovernance
+        onlyRole(DEFAULT_ADMIN_ROLE)
     {
-        authorizedExecutors[executor] = allowed;
+        _grantRole(EXECUTOR_ROLE, executor);
+    }
+
+    function removeExecutor(address executor)
+        external
+        onlyRole(DEFAULT_ADMIN_ROLE)
+    {
+        _revokeRole(EXECUTOR_ROLE, executor);
     }
 }

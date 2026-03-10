@@ -5,31 +5,38 @@ pragma solidity ^0.8.20;
 import "../interfaces/IAuthorizationManager.sol";
 import "../interfaces/IProposalManager.sol";
 import "../interfaces/ITimelockController.sol";
+import "@openzeppelin/contracts/access/AccessControl.sol";
 
-contract TreasuryCore {
+contract TreasuryCore is AccessControl {
 
     IAuthorizationManager public auth;
     IProposalManager public proposalManager;
     ITimelockController public timelock;
+    bytes32 public constant EXECUTOR_ROLE = keccak256("EXECUTOR_ROLE");
 
     constructor(
-        address _auth,
+         address governance,
         address _proposalManager,
         address _timelock
+        // address _auth,
+        // address _proposalManager,
+        // address _timelock
     ) {
-        auth = IAuthorizationManager(_auth);
-        proposalManager = IProposalManager(_proposalManager);
+          _grantRole(DEFAULT_ADMIN_ROLE, governance);
+        _grantRole(EXECUTOR_ROLE, governance);
+         proposalManager = IProposalManager(_proposalManager);
         timelock = ITimelockController(_timelock);
+        // auth = IAuthorizationManager(_auth);
+        // proposalManager = IProposalManager(_proposalManager);
+        // timelock = ITimelockController(_timelock);
     }
 
-    receive() external payable {}
+        receive() external payable {}
 
-    function executeProposal(uint256 proposalId) external {
-
-        require(
-            auth.authorizedExecutors(msg.sender),
-            "Not executor"
-        );
+    function executeProposal(uint256 proposalId)
+        external
+        onlyRole(EXECUTOR_ROLE)
+    {
 
         (
             address target,
@@ -43,8 +50,9 @@ contract TreasuryCore {
 
         timelock.validateExecution(eta);
 
-        (bool success,) = target.call{value:value}(data);
-
+        (bool success,) = target.call{value: value}(data);
         require(success, "Execution failed");
     }
+
+
 }

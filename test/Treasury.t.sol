@@ -39,7 +39,7 @@ contract TreasuryTest is Test {
 
         distributor = new ContributorDistributor();
 
-        auth.setExecutor(executor, true);
+        auth.grantRole(auth.EXECUTOR_ROLE(), executor);
 
         vm.stopPrank();
     }
