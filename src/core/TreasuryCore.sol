@@ -18,17 +18,12 @@ contract TreasuryCore is AccessControl {
          address governance,
         address _proposalManager,
         address _timelock
-        // address _auth,
-        // address _proposalManager,
-        // address _timelock
+        
     ) {
           _grantRole(DEFAULT_ADMIN_ROLE, governance);
         _grantRole(EXECUTOR_ROLE, governance);
          proposalManager = IProposalManager(_proposalManager);
         timelock = ITimelockController(_timelock);
-        // auth = IAuthorizationManager(_auth);
-        // proposalManager = IProposalManager(_proposalManager);
-        // timelock = ITimelockController(_timelock);
     }
 
         receive() external payable {}
